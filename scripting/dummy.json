@@ -1,0 +1,44 @@
+{
+  "shopName": "The Rusty Kettle",
+  "city": "Cape Town",
+  "established": 2014,
+  "openNow": true,
+  "openingHours": {
+    "weekdays": "07:00-17:00",
+    "saturday": "08:00-14:00",
+    "sunday": "closed"
+  },
+  "menu": [
+    {
+      "id": 1,
+      "item": "Flat White",
+      "priceZAR": 38.5,
+      "sizes": ["small", "regular", "large"],
+      "vegan": false
+    },
+    {
+      "id": 2,
+      "item": "Rooibos Latte",
+      "priceZAR": 42.0,
+      "sizes": ["regular", "large"],
+      "vegan": true
+    },
+    {
+      "id": 3,
+      "item": "Koeksister",
+      "priceZAR": 18.0,
+      "sizes": ["single"],
+      "vegan": false
+    }
+  ],
+  "staff": [
+    { "name": "Thandi", "role": "barista", "shiftsPerWeek": 5 },
+    { "name": "Pieter", "role": "baker", "shiftsPerWeek": 3 }
+  ],
+  "loyaltyProgram": {
+    "active": true,
+    "stampsForFreeCoffee": 9,
+    "membersEnrolled": 1247
+  },
+  "lastStocktake": "2026-11-14"
+}
