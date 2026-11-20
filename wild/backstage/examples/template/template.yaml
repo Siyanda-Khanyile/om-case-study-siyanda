@@ -1,0 +1,49 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-template
+kind: Template
+metadata:
+  name: example-nodejs-template
+  title: Example Node.js Template
+  description: An example template that runs the custom my:custom:action step
+spec:
+  owner: user:guest
+  type: service
+
+  # These parameters are used to generate the input form in the frontend, and are
+  # used to gather input data for the execution of the template.
+  parameters:
+    - title: Choose the file to create
+      required:
+        - filename
+        - contents
+      properties:
+        filename:
+          title: File name
+          type: string
+          description: Path of the file to create in the workspace
+          default: hello.txt
+          ui:autofocus: true
+        contents:
+          title: File contents
+          type: string
+          description: Text to write into the file
+          default: Hello from my:custom:action!
+          ui:widget: textarea
+
+  # my:custom:action is the only step in this template: it creates a file in the
+  # temporary workspace that the scaffolder sets up for this template run.
+  steps:
+    - id: create-file
+      name: Create a file in the workspace
+      action: my:custom:action
+      input:
+        filename: ${{ parameters.filename }}
+        contents: ${{ parameters.contents }}
+
+  # Outputs are displayed to the user after a successful execution of the template.
+  output:
+    text:
+      - title: File created
+        content: |
+          `${{ parameters.filename }}` was created in the workspace at
+          `${{ steps['create-file'].output.path }}`.
