@@ -85,3 +85,39 @@ make sure it is the only action/step in the example template
 Commit your code to a github repository and give acces to "adamaucamp"
 (or make the repo public if you want.) But do send the relevant git repo link to adam.aucamp@oldmutual.com when finished.
 
+
+---
+
+# Submission notes
+
+How to run each part.
+
+| Part | Folder | Command | Details |
+|------|--------|---------|---------|
+| 1. Scripting | `scripting/` | `python3 script.py tfplan-1.json` | [scripting/README.md](scripting/README.md) |
+| 2. Infrastructure as Code | `infrastructure-as-code/` | `terraform init && terraform apply` | [steps-to-fix.md](infrastructure-as-code/steps-to-fix.md) |
+| 3. Containers | `express-app/` | `docker compose up --build` → http://localhost:4567 | |
+| 4. Dev/Problem Solving | `wild/backstage/` | `nvm use 24 && yarn install && yarn start` → http://localhost:3000 | |
+
+## Prerequisites
+
+- **Python 3** for part 1 — standard library only, nothing to install.
+- **Terraform** for part 2. Run `terraform apply` and it should report no changes.
+- **Docker** for part 3.
+- **Node.js 24.15+ for part 4.** This is stricter than the general "Node.js"
+  requirement above: Backstage 1.57 refuses to start on Node 20 or 22 with
+  `Node version 20 is not a supported LTS version`. Use `nvm use 24` (or
+  `nvm install 24`) before `yarn install` in `wild/backstage`.
+
+## Part 4 in brief
+
+The custom action `my:custom:action` lives in
+[`wild/backstage/packages/backend/src/actions/createFileAction.ts`](wild/backstage/packages/backend/src/actions/createFileAction.ts)
+and is registered with the scaffolder by
+[`scaffolderModuleCustomActions.ts`](wild/backstage/packages/backend/src/modules/scaffolderModuleCustomActions.ts).
+It is the only step in
+[the example template](wild/backstage/examples/template/template.yaml).
+
+To see it run: start the app, sign in as Guest, then **Create** → **Example
+Node.js Template** → **Create**. The step writes the file into the scaffolder's
+temporary workspace and prints the path it used.
